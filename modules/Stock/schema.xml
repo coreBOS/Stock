@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_stock</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_stock` (
+  `stockid` int(11) DEFAULT NULL,
+  `whid` int(11) DEFAULT NULL,
+  `pdoid` int(11) DEFAULT NULL,
+  `stocknum` decimal(10,2) DEFAULT NULL,
+  `stockno` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`stockid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_stockcf</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_stockcf` (
+  `stockid` int(11) NOT NULL,
+  PRIMARY KEY (`stockid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>
