@@ -8,7 +8,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-$mod_strings = Array(
+$mod_strings = array(
 	'Stock' => 'Product Stock',
 	'SINGLE_Stock' => 'Product Stock',
 	'Stock ID' => 'Product Stock ID',
@@ -24,5 +24,4 @@ $mod_strings = Array(
 	'CannotCreate' => 'Sorry, a product can only be once in the same warehouse',
 	'Stock ID' => 'Product Stock ID',
 );
-
 ?>

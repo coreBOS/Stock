@@ -4,10 +4,13 @@
 <label>Stock</label>
 <parent>Inventory</parent>
 <dependencies>
+<vtiger_version>5.4.0</vtiger_version>
+<vtiger_max_version>5.*</vtiger_max_version>
+</dependencies>
 <license>
 <inline><![CDATA[
  *************************************************************************************************
- * Copyright 2012 JPL TSolucio, S.L.  --  This file is a part of coreBOS Multiwarehouse Extension.
+ * Copyright 2020 JPL TSolucio, S.L.  --  This file is a part of coreBOS Multiwarehouse Extension.
  * You can copy, adapt and distribute the work under the "Attribution-NonCommercial-ShareAlike"
  * Vizsage Public License (the "License"). You may not use this file except in compliance with the
  * License. Roughly speaking, non-commercial users may share and modify this code, but must give credit
@@ -25,13 +28,11 @@
  *************************************************************************************************
 ]]></inline>
 </license>
-<vtiger_version>5.4.0</vtiger_version>
-</dependencies>
 <tables>
 <table>
 <name>vtiger_stock</name>
 <sql><![CDATA[CREATE TABLE `vtiger_stock` (
-  `stockid` int(11) DEFAULT NULL,
+  `stockid` int(11) NOT NULL,
   `whid` int(11) DEFAULT NULL,
   `pdoid` int(11) DEFAULT NULL,
   `stocknum` decimal(10,2) DEFAULT NULL,
@@ -63,10 +64,10 @@
 <selected>0</selected>
 <sequence>1</sequence>
 <maximumlength>100</maximumlength>
-<typeofdata>I~M</typeofdata>
+<typeofdata>V~O</typeofdata>
 <quickcreate>1</quickcreate>
 <quickcreatesequence></quickcreatesequence>
-<displaytype>2</displaytype>
+<displaytype>1</displaytype>
 <info_type>BAS</info_type>
 <helpinfo><![CDATA[]]></helpinfo>
 <masseditable>1</masseditable>
@@ -86,10 +87,10 @@
 <selected>0</selected>
 <sequence>2</sequence>
 <maximumlength>100</maximumlength>
-<typeofdata>I~M</typeofdata>
+<typeofdata>V~O</typeofdata>
 <quickcreate>0</quickcreate>
 <quickcreatesequence>1</quickcreatesequence>
-<displaytype>2</displaytype>
+<displaytype>1</displaytype>
 <info_type>BAS</info_type>
 <helpinfo><![CDATA[]]></helpinfo>
 <masseditable>1</masseditable>
@@ -151,7 +152,7 @@
 <readonly>1</readonly>
 <presence>2</presence>
 <selected>0</selected>
-<sequence>5</sequence>
+<sequence>1</sequence>
 <maximumlength>100</maximumlength>
 <typeofdata>V~M</typeofdata>
 <quickcreate>1</quickcreate>
@@ -171,15 +172,35 @@
 <readonly>1</readonly>
 <presence>2</presence>
 <selected>0</selected>
-<sequence>6</sequence>
+<sequence>2</sequence>
 <maximumlength>100</maximumlength>
-<typeofdata>T~O</typeofdata>
+<typeofdata>DT~O</typeofdata>
 <quickcreate>1</quickcreate>
 <quickcreatesequence></quickcreatesequence>
 <displaytype>2</displaytype>
 <info_type>BAS</info_type>
 <helpinfo><![CDATA[]]></helpinfo>
-<masseditable>1</masseditable>
+<masseditable>0</masseditable>
+</field>
+<field>
+<fieldname>created_user_id</fieldname>
+<uitype>52</uitype>
+<columnname>smcreatorid</columnname>
+<tablename>vtiger_crmentity</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>Created By</fieldlabel>
+<readonly>1</readonly>
+<presence>0</presence>
+<selected>0</selected>
+<sequence>3</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>3</quickcreate>
+<quickcreatesequence>1</quickcreatesequence>
+<displaytype>2</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>0</masseditable>
 </field>
 <field>
 <fieldname>modifiedtime</fieldname>
@@ -191,7 +212,7 @@
 <readonly>1</readonly>
 <presence>2</presence>
 <selected>0</selected>
-<sequence>7</sequence>
+<sequence>4</sequence>
 <maximumlength>100</maximumlength>
 <typeofdata>T~O</typeofdata>
 <quickcreate>1</quickcreate>
@@ -199,7 +220,7 @@
 <displaytype>2</displaytype>
 <info_type>BAS</info_type>
 <helpinfo><![CDATA[]]></helpinfo>
-<masseditable>1</masseditable>
+<masseditable>0</masseditable>
 </field>
 </fields>
 </block>
@@ -258,19 +279,19 @@
 </customview>
 </customviews>
 <sharingaccess>
-<default>public_readwritedelete</default>
+<default>private</default>
 </sharingaccess>
 <actions>
+<action>
+<name><![CDATA[Merge]]></name>
+<status>enabled</status>
+</action>
 <action>
 <name><![CDATA[Import]]></name>
 <status>enabled</status>
 </action>
 <action>
 <name><![CDATA[Export]]></name>
-<status>enabled</status>
-</action>
-<action>
-<name><![CDATA[Merge]]></name>
 <status>enabled</status>
 </action>
 </actions>
@@ -286,5 +307,33 @@
 </actions>
 <relatedmodule>Documents</relatedmodule>
 </relatedlist>
+<relatedlist>
+<function>get_dependents_list</function>
+<label>Warehouse</label>
+<sequence>1</sequence>
+<presence>0</presence>
+<actions>
+<action>SELECT</action>
+<action>ADD</action>
+</actions>
+<relatedmodule>Warehouse</relatedmodule>
+</relatedlist>
+<relatedlist>
+<function>get_dependents_list</function>
+<label>Products</label>
+<sequence>1</sequence>
+<presence>0</presence>
+<actions>
+<action>SELECT</action>
+<action>ADD</action>
+</actions>
+<relatedmodule>Products</relatedmodule>
+</relatedlist>
 </relatedlists>
+<events>
+</events>
+<customlinks>
+</customlinks>
+<crons>
+</crons>
 </module>
