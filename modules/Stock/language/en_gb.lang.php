@@ -9,14 +9,19 @@
  ************************************************************************************/
 
 $mod_strings = array(
-	'ModuleName' => 'Module Name',
-	'SINGLE_ModuleName' => 'Module Name',
-	'ModuleName ID' => 'Module Name ID',
+	'Stock' => 'Product Stock',
+	'SINGLE_Stock' => 'Product Stock',
+	'Stock ID' => 'Product Stock ID',
 
 	'LBL_CUSTOM_INFORMATION' => 'Custom Information',
-	'LBL_MODULEBLOCK_INFORMATION' => 'ModuleBlock Information',
+	'LBL_STOCK_INFORMATION' => 'Stock Information',
 	'LBL_DESCRIPTION_INFORMATION' => 'Description',
 
-	'ModuleFieldLabel' => 'ModuleFieldLabel Text',
+	'StockNo' => 'Stock No',
+	'Warehouse' => 'Warehouse',
+	'Producto' => 'Product',
+	'Stock' => 'Stock',
+	'CannotCreate' => 'Sorry, a product can only be once in the same warehouse',
+	'Stock ID' => 'Product Stock ID',
 );
 ?>

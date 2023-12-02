@@ -9,12 +9,18 @@
  ************************************************************************************/
 
 $mod_strings = array(
-	'ModuleName' => 'Module Name',
-	'SINGLE_ModuleName' => 'Module Name',
-	'ModuleName ID' => 'Module Name ID',
+	'Stock' => 'Stock Producto',
+	'SINGLE_Stock' => 'Stock Producto',
+	'Stock ID' => 'Stock Producto ID',
 
 	'LBL_CUSTOM_INFORMATION' => 'Información Personalizada',
-	'LBL_MODULEBLOCK_INFORMATION' => 'Información ModuleName',
+	'LBL_STOCK_INFORMATION' => 'Información Stock',
 	'LBL_DESCRIPTION_INFORMATION' => 'Descripción',
+
+	'StockNo' => 'Ref. Stock',
+	'Warehouse' => 'Almacén',
+	'Producto' => 'Producto',
+	'Stock' => 'Stock',
+	'CannotCreate' => 'Lo siento, un producto solo puede estar una vez en un almacén',
 );
 ?>

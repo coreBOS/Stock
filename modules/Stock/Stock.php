@@ -18,7 +18,7 @@ class Stock extends CRMEntity {
 	/** Indicator if this is a custom module or standard module */
 	public $IsCustomModule = true;
 	public $HasDirectImageField = false;
-	public $moduleIcon = array('library' => 'standard', 'containerClass' => 'slds-icon_container slds-icon-standard-account', 'class' => 'slds-icon', 'icon'=>'account');
+	public $moduleIcon = array('library' => 'standard', 'containerClass' => 'slds-icon_container slds-icon-standard-account', 'class' => 'slds-icon', 'icon'=>'planogram');
 
 	/**
 	 * Mandatory table for supporting custom fields.
@@ -36,7 +36,7 @@ class Stock extends CRMEntity {
 	public $tab_name_index = array(
 		'vtiger_crmentity' => 'crmid',
 		'vtiger_stock'   => 'stockid',
-		'vtiger_stockcf' => 'stockid'
+		'vtiger_stockcf' => 'stockid',
 	);
 
 	/**
@@ -93,7 +93,7 @@ class Stock extends CRMEntity {
 	public $def_detailview_recname = 'stockno';
 
 	// Required Information for enabling Import feature
-	public $required_fields = array('stockno'=>1);
+	public $required_fields = array();
 
 	// Callback function list during Importing
 	public $special_functions = array('set_import_assigned_user');
@@ -102,7 +102,7 @@ class Stock extends CRMEntity {
 	public $default_sort_order='ASC';
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
-	public $mandatory_fields = array('createdtime', 'modifiedtime', 'stockno');
+	public $mandatory_fields = array('createdtime', 'modifiedtime');
 
 	public function save_module($module) {
 		if ($this->HasDirectImageField) {
@@ -110,11 +110,11 @@ class Stock extends CRMEntity {
 		}
 		global $adb;
 		if ($this->mode!='edit') { // direct create, sum stock to product total
-			$adb->pquery('update vtiger_products set qtyinstock=qtyinstock+? where productid=?',array($this->column_fields['stocknum'],$this->column_fields['pdoid']));
+			$adb->pquery('update vtiger_products set qtyinstock=qtyinstock+? where productid=?', array($this->column_fields['stocknum'], $this->column_fields['pdoid']));
 		}
 	}
 
-	function trash($module, $id) {
+	public function trash($module, $id) {
 		global $adb;
 		$stck=$adb->query("select stocknum,pdoid from vtiger_stock where stockid=$id");
 		$snum=$adb->query_result($stck,0,'stocknum');
@@ -132,14 +132,14 @@ class Stock extends CRMEntity {
 		if ($event_type == 'module.postinstall') {
 			// Handle post installation actions
 			// Related lists
-			$this->setModuleSeqNumber('configure', $modulename, $modulename.'-', '0000001');
+			$this->setModuleSeqNumber('configure', $modulename, 'stck-', '0000001');
 			$module = Vtiger_Module::getInstance($modulename);
 			$mod = Vtiger_Module::getInstance('Products');
 			$mod->setRelatedList($module, 'Stock', Array('ADD'),'get_dependents_list');
 			$mod = Vtiger_Module::getInstance('Warehouse');
 			$mod->setRelatedList($module, 'Stock', Array('ADD'),'get_dependents_list');
 			//Create Outside warehouses
-			global $current_user,$adb;
+			global $current_user, $adb;
 			include_once 'modules/Warehouse/Warehouse.php';
 			$module = new Warehouse();
 			$module->column_fields['assigned_user_id']=$current_user->id;
